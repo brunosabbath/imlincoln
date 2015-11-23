@@ -1,6 +1,12 @@
 package com.bruno.imlincoln.service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import com.bruno.imlincoln.builder.EventPojoBuilder;
 import com.bruno.imlincoln.dao.repository.EventRepository;
@@ -44,12 +50,52 @@ public class EventService {
 
 	public List<EventPojo> getByName(String name) {
 		
-		List<Event> list = eventRepo.findEventByNameLike(name);
+		List<Event> list = eventRepo.findEventByNameContaining(name);
 		
 		if(list == null)
 			throw new NotFoundException("No events found");
 		
 		return EventPojoBuilder.build(list);
+	}
+
+	public List<EventPojo> findAvailableEvets() {
+		Timestamp today = Timestamp.valueOf(LocalDateTime.now());
+		List<Event> list = eventRepo.findAvailableEvets(today);
+		
+		if(list == null || list.isEmpty())
+			throw new NotFoundException("No event available");
+		
+		return EventPojoBuilder.build(list);
+		
+	}
+
+	public List<EventPojo> findAvailableEvetsByName(String name) {
+		
+		Timestamp today = Timestamp.valueOf(LocalDateTime.now());
+		List<Event> list = eventRepo.findEventByEndDateGreaterThanAndNameContainingIgnoreCase(today,name);
+		
+		if(list == null || list.isEmpty())
+			throw new NotFoundException("No event available");
+		
+		return EventPojoBuilder.build(list);
+	}
+
+	public void delete(Long id) {
+		
+		eventRepo.delete(id);
+	}
+
+	public List<EventPojo> listPage(int total) {
+		PageRequest request = new PageRequest(total, 2);
+		Page<Event> listOldPage = eventRepo.findAll(request);
+		List<Event> listEvent = new ArrayList<Event>();
+		
+		for(Event e : listOldPage)
+			listEvent.add(e);
+		
+		List<EventPojo> listEventPojo = EventPojoBuilder.build(listEvent);
+		
+		return listEventPojo;
 	}
 
 }

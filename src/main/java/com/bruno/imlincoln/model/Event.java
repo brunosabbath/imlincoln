@@ -13,7 +13,6 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Event.findAll", query="SELECT e FROM Event e")
 public class Event implements Serializable{
 	private static final long serialVersionUID = 1L;
 
