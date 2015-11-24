@@ -32,10 +32,6 @@ public class VenueService {
 		
 		return listPojo;
 	}
-	
-	public List<Venue> listVenueByName(String name){
-		return venueRepo.findVenueByName(name);
-	}
 
 	public VenuePojo get(Long id) {
 
@@ -49,7 +45,7 @@ public class VenueService {
 
 	public List<VenuePojo> getByName(String name) {
 		
-		List<Venue> list = venueRepo.findVenueByName(name);
+		List<Venue> list = venueRepo.findVenueByNameContaining(name);
 		List<VenuePojo> listPojo = new ArrayList<VenuePojo>();
 		
 		if(list.isEmpty() || list == null)
@@ -59,6 +55,10 @@ public class VenueService {
 			listPojo.add(VenuePojoBuilder.build(venue));
 			
 		return listPojo;
+	}
+
+	public void delete(Long id) {
+		venueRepo.delete(id);
 	}
 	
 }

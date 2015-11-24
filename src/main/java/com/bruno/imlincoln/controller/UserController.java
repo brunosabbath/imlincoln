@@ -1,10 +1,13 @@
 package com.bruno.imlincoln.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bruno.imlincoln.dao.repository.UserRepository;
@@ -21,6 +24,12 @@ public class UserController {
 	@Autowired
 	private UserRepository repo;
 	private UserService service;
+	
+	@RequestMapping(value = "/auth", method = RequestMethod.GET)
+	public Principal user(Principal user) {
+		System.out.println(user);
+		return user;
+	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public UserPojo get(@PathVariable Long id){

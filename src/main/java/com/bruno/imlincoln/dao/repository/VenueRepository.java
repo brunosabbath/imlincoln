@@ -8,6 +8,6 @@ import com.bruno.imlincoln.model.Venue;
 
 public interface VenueRepository extends CrudRepository<Venue, Long>{
 
-	List<Venue> findVenueByName(String name);
+	List<Venue> findVenueByNameContaining(String name);
 
 }

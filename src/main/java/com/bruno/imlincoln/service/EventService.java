@@ -98,4 +98,9 @@ public class EventService {
 		return listEventPojo;
 	}
 
+	public List<EventPojo> findEventByVenueId(Long id) {
+		List<Event> list = eventRepo.findEventByVenueId(id);
+		return EventPojoBuilder.buildSimpleWithoutVenue(list);
+	}
+
 }

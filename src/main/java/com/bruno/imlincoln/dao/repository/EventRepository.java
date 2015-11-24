@@ -16,4 +16,5 @@ public interface EventRepository extends PagingAndSortingRepository<Event, Long>
 	public List<Event> findAvailableEvets(@Param("today") Timestamp today);
 	//@Query("SELECT e FROM Event AS e WHERE e.endDate >= :today AND e.name LIKE :name ORDER BY e.endDate")
 	public List<Event> findEventByEndDateGreaterThanAndNameContainingIgnoreCase(Timestamp today, String name);
+	public List<Event> findEventByVenueId(Long id);
 }

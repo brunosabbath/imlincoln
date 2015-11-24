@@ -61,6 +61,12 @@ public class EventController {
 		return service.findAvailableEvetsByName(name);
 	}
 	
+	@RequestMapping(value = "/venue/{id}" ,method = RequestMethod.GET)
+	public List<EventPojo> findEventsFromVenue(@PathVariable Long id){
+		service = new EventService(eventRepo);
+		return service.findEventByVenueId(id);
+	}
+	
 	@RequestMapping(method = RequestMethod.DELETE)
 	public void delete(@PathVariable Long id){
 		service = new EventService(eventRepo);
@@ -78,5 +84,7 @@ public class EventController {
 		service = new EventService(eventRepo);
 		service.save(event);;
 	}
+	
+	
 	
 }
