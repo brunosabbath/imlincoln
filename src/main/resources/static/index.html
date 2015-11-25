@@ -1,46 +1,95 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
 <head>
-<title>Hello AngularJS</title>
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<style type="text/css">
-[ng\:cloak], [ng-cloak], .ng-cloak {
-	display: none !important;
-}
-</style>
+	<meta charset="UTF-8">
+	<title>I'm Lincoln</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+	<!--<script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular/angular-route.js"></script>-->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+	<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="controller/app.js"></script>
+  <script src="controller/eventcontroller.js"></script>
+  <script src="controller/venuecontroller.js"></script>
+  <script src="controller/feedbackcontroller.js"></script>
+  <script src="lib/angular/dialogs.min.js"></script>
+  
 </head>
 
-<body ng-app="MyApp">
-	<div ng-controller="PaginationCtrl">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Name</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="item in pagedItems">
-					<td>{{item.id}}</td>
-					<td>{{item.name}}</td>
-				</tr>
-			</tbody>
-			<tfoot>
-				<td colspan="3">
-					<button class="btn" href="#" ng-class="nextPageDisabledClass()" ng-click="loadMore()">Load More</button>
-				</td>
-			</tfoot>
-		</table>
-	</div>
+  </head>
 
+  <body>  
+    
+    <!--<img ng-src="http://www.nebraskabusinessfirst.com/_images/slideshow/lincoln/downtown_lincoln_capitol_nebraska.jpg" class="img-responsive">-->
+    <img ng-src="images/d2.png" class="img-responsive visible-lg">
+    <!--<div class="container">
+      <img ng-src="images/logobig.png" class="img-responsive visible-lg">
+    </div>-->
 
+    <!-- tinha ul no lugar de nav -->
+    <nav class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
 
+        <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand visible-xs" href="#today"><img ng-src="images/logow.png"></a>
+      </div>
+    
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-click="navCollapsed = true">
+        
+        <ul class="nav navbar-nav">
+          <li><a href="#today"><strong>today</strong></a></li>
+          <li><a href="#week"><strong>this week</strong></a></li>
+          <!--<li><a href="#recommended"><strong>may be interesting for me</strong></a></li>-->
+          <!--<li><a href="#liked"><strong>events i liked</strong></a></li>-->
+          <li><a href="#venues"><strong>venues</strong></a></li>
+          <li><a href="#addvenue"><strong>add venue</strong></a></li>
+          <li><a href="#addevent"><strong>add event</strong></a></li>
+          <li><a href="#feedback"><strong>leave your feedback</strong></a></li>
+          <li><a href="#login"><strong>login</strong></a></li>
+          <li><a href="" ng-submit="logout()" ng-show="authenticated"><strong>logout</strong></a></li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+          </div>
+        </form>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+    
+    <div ng-view></div>
 
-	<script
-		src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
-	<script src="js/app.js"></script>
-</body>
+    <!--<div ng-include src="'partials/footer.html'"></div>-->
+
+    <br /><br /><br /><br />
+    <div class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+
+        <ul class="nav navbar-nav">
+          <a href="#face"><img src="images/icons/facebook.png"></a>
+          <a href="https://plus.google.com/+BrunoVieira13"><img src="images/icons/googleplus.png"></a>
+          <a href="https://linkedin.com/in/brunovieirabh"><img src="images/icons/linkedin.png"></a>
+          <a href="#about" class="mylinkfooter"><strong>about this app</strong></a>
+          <a href="https://play.google.com/store/search?q=pub:Bruno Vieira Resende e Silva">
+          <img alt="Android app on Google Play"
+       src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+        </ul>
+        <ul>
+          &nbsp;&nbsp;
+          <a href="https://www.linkedin.com/in/brunovieirabh" class="mylinkfooter"><strong>Made by Bruno</strong></a><img src="images/icons/brazil.png"><img src="images/icons/usa.png">
+        </ul>
+          
+</a>
+      </div>
+    </div>
+
+  </body>
 </html>

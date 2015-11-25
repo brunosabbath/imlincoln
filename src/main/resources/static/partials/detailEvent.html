@@ -1,0 +1,29 @@
+<div class="scroll-thru-me" scroller>
+	<div class="container">
+		
+		  
+		  <!--<div class="col-sm-6 col-md-4">-->
+		    <div class="panel panel-outro">
+		       <div class="panel-body">
+		       	<h1 class="event-title"><strong>{{event.eventName}}</strong></h1>
+		       	<!--<button type="button" class="btn btn-danger btn-lg">I'm interested</button><br />-->
+		       	
+		       	<h3><i>Description</i></h3>
+		       	<h3>{{event.eventDescription}}</h3>
+		       	<h3><i>Where?</i> {{event.venue.venueName}}</h3>
+		       	<h3>{{event.address}}</h3>
+		       	<h3><i>Starts at {{event.startDate | date:'medium'}}</i></h3>
+		       	<h3><i>Finishes at {{event.endDate | date:'medium'}}</i></h3>
+
+		       	<ul class="row">
+		       	<h3>Tags:</h3>
+				<ul ng-repeat="tag in event.tags">
+		       		<li class="label label-danger">{{tag.nameTag}}</li>
+		       	</ul>
+
+		       </ul>
+
+		    </div>		  
+		
+	</div>
+</div>

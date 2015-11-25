@@ -1,0 +1,25 @@
+<div ng-controller="addVenue">
+	<div class="scroll-thru-me" scroller>
+		<div class="container">
+			<div class="alert alert-danger" ng-show="loading">Loading</div>
+			<form ng-submit="sendForm()" class="col-lg-8">
+				<h1 class="event-title">Add Venue</h1>
+				<h3>Venue name</h3><input type="text" class="form-control" ng-model="venueName" required/>
+				<h3>Description</h3><textarea rows="5" ng-model="venueDescription" class="form-control" ></textarea>
+				<h3>Address</h3><input type="text" class="form-control" ng-model="address" required/>
+				<h3>Telephone</h3><input type="number" class="form-control" ng-model="telephone" />
+				<h3>website</h3><input type="text" class="form-control" ng-model="website" />
+				<h3>Email</h3><input type="email" class="form-control" ng-model="email" />
+				<h3>facebook</h3><input type="text" class="form-control" ng-model="facebook" />
+				<h3>twitter</h3><input type="text" class="form-control" ng-model="twitter" />
+				<h3>password</h3><input type="password" class="form-control" ng-model="password" required/><br/><br/>
+
+				<button type="submit" id="submit" class="btn btn-danger btn-lg"/>submit</button>
+
+			</form>
+			<div class="alert alert-danger" ng-show="loading">Loading</div>
+		</div>
+
+	</div>
+
+<div>

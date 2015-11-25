@@ -1,0 +1,67 @@
+<div>
+	<div class="scroll-thru-me" scroller>
+		<div class="container">
+			<form ng-submit="updateForm()">
+				<div class="alert alert-danger" ng-show="loading">Loading</div>
+				<h1 class="event-title">Edit Event</h1>
+
+				<h3>Event name</h3><input type="text" class="form-control" ng-model="eventName" required />
+				<h3>Description</h3><textarea rows="5" ng-model="eventDescription" class="form-control" required></textarea>
+
+				<h3>Select venue</h3>
+				<select ng-change="selectVenue(venue)" class="form-control" ng-model="venue" ng-options="venue as venue.venueName for venue in venues">
+					<option value="">Select Venue</option>
+				</select><br />
+				
+				<h3>Address</h3><input type="text" class="form-control" ng-model="address" required/>
+		<div>
+		    <h3>Start date</h3>
+		    <div class="row">
+		        <div class="col-md-4">
+		            <p class="input-group">
+		              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="startDate" is-open="opened1" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-readonly="true"/>
+		              <span class="input-group-btn">
+		                <button type="button" class="btn btn-default" ng-click="open($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+		              </span>
+		            </p>
+		            
+		            <timepicker ng-model="startTime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+		        </div>
+		    </div>
+
+		    <h3>End date</h3>
+		    <div class="row">
+		        <div class="col-md-4">
+		            <p class="input-group">
+		              <input type="text" class="form-control" datepicker-popup ng-model="endDate" is-open="opened2" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-readonly="true"/>
+		              <span class="input-group-btn">
+		                <button type="button" class="btn btn-default" ng-click="open($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+		              </span>
+		            </p>
+		            <timepicker ng-model="endTime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+		        </div>
+		    </div>
+		    
+		</div>
+
+				<h3>Tags</h3>
+				<input type="text" placeholder="insert tag" class="form-control" ng-model="nameTag">
+				<button type="button" ng-click="addTag()" class="btn btn-danger btn-sm">add tag</button>
+
+				<table>
+					<tr ng-repeat="tag in tags">
+						<td><span class="label label-danger">{{tag.nameTag}}</span></td>		
+						<td><button ng-click="removeTag($index)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></button></td>
+					</tr>
+				</table>
+
+				<h3>password</h3><input type="password" class="form-control" ng-model="password" required/><br/><br/>
+
+				<button type="submit" id="submit" class="btn btn-danger btn-lg"/>submit</button>
+
+			</form>
+			<div class="alert alert-danger" ng-show="loading">Loading</div>
+		</div>
+
+	</div>
+</div>

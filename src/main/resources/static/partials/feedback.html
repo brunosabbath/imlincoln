@@ -1,0 +1,20 @@
+<div ng-controller="FeedbackController">
+	<div class="scroll-thru-me" scroller>
+		<div class="container">
+			<form ng-submit="submitForm()" class="col-lg-6">
+				<div class="alert alert-danger" ng-show="loading">Loading</div>
+				<h1 class="event-title">Feedback</h1>
+				<h3>Your name</h3><input type="text" class="form-control" ng-model="name" />
+				<h3>Email</h3><input type="email" class="form-control" ng-model="email" />
+				<h3>Feedback</h3><!--<input type="text" class="form-control" ng-model="feedback" />-->
+				<textarea rows="5" ng-model="feedback" class="form-control" required></textarea>
+				<br/><br/>
+
+				<button type="submit" id="submit" class="btn btn-danger btn-lg"/>submit</button>
+
+			</form>
+			<div class="alert alert-danger" ng-show="loading">Loading</div>
+
+		</div>
+	</div>
+<div>
