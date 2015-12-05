@@ -86,6 +86,11 @@ public class Event implements Serializable{
 		this.description = description;
 		return this;
 	}
+	
+	public Event updateDescription(String description){
+		this.description += "\n" + description + "\n";
+		return this;
+	}
 
 	public Timestamp getEndDate() {
 		return this.endDate;

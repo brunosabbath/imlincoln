@@ -14,7 +14,7 @@ public class VenuePojo {
 	private String email;
 	private String facebook;
 	private String name;
-	private BigInteger telephone;
+	private String telephone;
 	private String twitter;
 	private String website;
 	private List<EventPojo> events;
@@ -95,11 +95,11 @@ public class VenuePojo {
 		return this;
 	}
 	
-	public BigInteger getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 	
-	public VenuePojo setTelephone(BigInteger telephone) {
+	public VenuePojo setTelephone(String telephone) {
 		this.telephone = telephone;
 		return this;
 	}

@@ -35,7 +35,7 @@ public class Venue implements Serializable {
 
 	private String name;
 
-	private BigInteger telephone;
+	private String telephone;
 
 	private String twitter;
 
@@ -123,11 +123,11 @@ public class Venue implements Serializable {
 		return this;
 	}
 
-	public BigInteger getTelephone() {
+	public String getTelephone() {
 		return this.telephone;
 	}
 
-	public Venue setTelephone(BigInteger telephone) {
+	public Venue setTelephone(String telephone) {
 		this.telephone = telephone;
 		return this;
 	}
