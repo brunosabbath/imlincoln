@@ -6,7 +6,7 @@ eventController.controller('WeekDetailsController', ['$scope','$http', '$routePa
       $scope.loading = true;
         //$http.get("http://eventslnk.elasticbeanstalk.com/event/id/" + $routeParams.id).success(
 	      //$http.get("http://localhost:8080/events-server/event/id/" + $routeParams.id).success(
-        $http.get("http://localhost:8080/event/id/" + $routeParams.id).success(
+        $http.get("http://localhost:8080/event/" + $routeParams.id).success(
 	    	function(response) {
 	    		$scope.event = response;
           $scope.loading = false;
@@ -472,7 +472,40 @@ eventController.controller('ModalInstanceCtrl',function($scope,$modalInstance){
   };
 });
 
+eventController.controller('TodayController', ['$scope','$http', '$modal', '$location',
+                                           	function($scope, $http, $modal, $location) {
 
+	  $scope.itemsPerPage = 9;
+	  $scope.currentPage = 0;
+	  $scope.total = 50;
+	  //$scope.total = Item.total();
+	  //$scope.pagedItems = Item.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
+
+	  	$http.get('http://localhost:8080/event/pages/0').success(function(data) {
+	  		$scope.events = data;
+		});
+	  
+	  $scope.loadMore = function() {
+	    $scope.currentPage++;
+	    
+	    $http.get('http://localhost:8080/event/pages/'+$scope.currentPage).success(function(data) {
+	    	newItems = data;
+	    	$scope.events = $scope.events.concat(data);
+		});
+	    //alert(newItems);
+	    //var newItems = Item.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
+	    
+	  };
+
+	  $scope.nextPageDisabledClass = function() {
+	    return $scope.currentPage === $scope.pageCount()-1 ? "disabled" : "";
+	  };
+
+	  $scope.pageCount = function() {
+	    return Math.ceil($scope.total/$scope.itemsPerPage);
+	  };
+}
+/*
 eventController.controller('TodayController', ['$scope','$http', '$modal', '$location',
 	function($scope, $http, $modal, $location) {
 
@@ -527,7 +560,7 @@ eventController.controller('TodayController', ['$scope','$http', '$modal', '$loc
     };
 
         $scope.loading = true;
-        $http.get("http://localhost:8080/event/today").success(
+        $http.get("http://localhost:8080/event/available").success(
 	      //$http.get("http://localhost:8080/events-server/event/today").success(
         //$http.get("http://eventslnk.elasticbeanstalk.com/event/today").success(
 	    	function(response) {
@@ -538,5 +571,5 @@ eventController.controller('TodayController', ['$scope','$http', '$modal', '$loc
           $scope.loading = false;
           $scope.errormsg = error.message;
         });
-	}    
+	}*/    
 ]);

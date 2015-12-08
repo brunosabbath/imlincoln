@@ -7,17 +7,24 @@
 		  <!--<div class="col-sm-6 col-md-4">-->
 		    <div class="panel panel-default">
 		       <div class="panel-body">
-		       	<h1 class="event-title"><strong><a href="#/week/{{event.id}}" class="mylink">{{event.eventName | limitTo : 28}}</a></strong></h1>
-		       	<h4>@{{event.venue.venueName}}</h4>
-		       	<h6>{{event.eventDescription | limitTo: 100}}...</h6>
+		       	<h1 class="event-title"><strong><a href="#/week/{{event.id}}" class="mylink">{{event.name | limitTo : 28}}</a></strong></h1>
+		       	<h4>@{{event.venue.name}}</h4>
+		       	<h6>{{event.description | limitTo: 100}}...</h6>
 		       	<h6><i>Starts at {{event.startDate | date:'medium'}}</i></h6>
 		       	<h6><i>Finishes at {{event.endDate | date:'medium'}}</i></h6>
-		       	<button ng-click="editDeleteEvent($index,'edit')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+		       	<!--<button ng-click="editDeleteEvent($index,'edit')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 		       	<button ng-click="editDeleteEvent($index,'delete')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+		       	-->
 		       </div>
 		    </div>
 		  </div>
 		</span>
+	</div>
+	
+	<div class="container">
+	  <div class="col-md-4 col-md-offset-5">
+	     <button class="btn btn-danger" href="" ng-class="nextPageDisabledClass()" ng-click="loadMore()">Load More Events</button>
+	  </div>
 	</div>
 
 	<script type='text/ng-template' id='myModalContent.html'>

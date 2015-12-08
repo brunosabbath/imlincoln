@@ -7,11 +7,13 @@
 		  <!--<div class="col-sm-6 col-md-4">-->
 		    <div class="panel panel-default">
 		       <div class="panel-body">
-		       	<h1 class="event-title"><strong><a href="#/venues/{{venue.id}}" class="mylink">{{venue.venueName | limitTo: 30}}</a></strong></h1>
-		       	<h3>{{venue.address | limitTo: 70}}</h3>
-		       	<h4>{{venue.venueDescription | limitTo: 90}}...</h4>
-		       	<button ng-click="editDeleteVenue($index,'edit')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+		       	<h2 class="event-title"><strong><a href="#/venues/{{venue.id}}" class="mylink">{{venue.name | limitTo: 30}}</a></strong></h2>
+		       	<h4>{{venue.address | limitTo: 70}}</h4>
+		       	<h4>{{venue.city | limitTo: 70}}</h4>
+		       	<h4>{{venue.description | limitTo: 90}}...</h4>
+		       	<!-- <button ng-click="editDeleteVenue($index,'edit')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 		       	<button ng-click="editDeleteVenue($index,'delete')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+		       	 -->
 		       </div>
 		    </div>
 		  </div>

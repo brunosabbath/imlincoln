@@ -17,6 +17,7 @@ import com.bruno.imlincoln.model.validation.EventValidation;
 
 public class EventService {
 
+	private static final int TOTAL_EVENTS_PER_PAGE = 9;
 	private EventRepository eventRepo;
 	
 	public EventService(EventRepository eventRepo){
@@ -86,7 +87,7 @@ public class EventService {
 	}
 
 	public List<EventPojo> listPage(int total) {
-		PageRequest request = new PageRequest(total, 2);
+		PageRequest request = new PageRequest(total, TOTAL_EVENTS_PER_PAGE);
 		Page<Event> listOldPage = eventRepo.findAll(request);
 		List<Event> listEvent = new ArrayList<Event>();
 		

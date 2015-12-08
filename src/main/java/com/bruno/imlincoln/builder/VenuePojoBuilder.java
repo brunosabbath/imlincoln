@@ -24,7 +24,7 @@ public class VenuePojoBuilder {
 
 	public static VenuePojo buildSimple(Venue venue) {
 		VenuePojo pojo = new VenuePojo();
-		pojo.setId(venue.getId()).setName(venue.getName());
+		pojo.setId(venue.getId()).setName(venue.getName()).setAddress(venue.getAddress()).setCity(venue.getCity());
 		return pojo;
 	}
 	

@@ -97,7 +97,7 @@ app.controller('login', function($rootScope, $scope, $http, $location, $route) {
 
 		var headers = credentials ? {authorization : "Basic " + btoa(credentials.username + ":" + credentials.password)} : {};
 
-		$http.get('http://localhost:8080/user', { headers : headers }).success(function(data) {
+		$http.get('http://localhost:8080/auth', { headers : headers }).success(function(data) {
 			if (data.name) {
 				$rootScope.authenticated = true;
 			} else {
