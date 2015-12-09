@@ -45,9 +45,9 @@ app.config(function($routeProvider, $httpProvider){
 				templateUrl: 'partials/recommended.html'
 				//controller: 'RecommendedController'
 			}).
-			when('/liked',{
-				templateUrl: 'partials/liked.html'
-				//controller: 'LikedController'
+			when('/myUpcomingEvents',{
+				templateUrl: 'partials/myUpcomingEvents.html',
+				controller: 'MyUpcomingEventsController'
 			}).
 			when('/venues',{
 				templateUrl: 'partials/venues.html',
@@ -146,60 +146,3 @@ app.controller('login', function($rootScope, $scope, $http, $location, $route) {
 	}
 
 });
-
-/*
-app.config(['$routeProvider', function($routeProvider){
-
-		$routeProvider.
-			when('/today',{
-				templateUrl: 'partials/events.html',
-				controller: 'TodayController'
-			}).
-			when('/week',{
-				templateUrl: 'partials/events.html',
-				controller: 'WeekController'
-			}).
-			when('/week/:id',{
-				templateUrl: 'partials/detailEvent.html',
-				controller: 'WeekDetailsController'
-			}).
-			when('/recommended',{
-				templateUrl: 'partials/recommended.html'
-				//controller: 'RecommendedController'
-			}).
-			when('/liked',{
-				templateUrl: 'partials/liked.html'
-				//controller: 'LikedController'
-			}).
-			when('/venues',{
-				templateUrl: 'partials/venues.html',
-				controller: 'VenueController'
-			}).
-			when('/venues/:id',{
-				templateUrl: 'partials/detailVenue.html',
-				controller: 'VenueDetailsController'
-			}).
-			when('/addvenue',{
-				templateUrl: 'partials/addVenue.html'
-			}).
-			when('/addevent',{
-				templateUrl: 'partials/addEvent.html'
-				//controller: 'VenueController'
-			}).
-			when('/editevent/:id',{
-				templateUrl: 'partials/editEvent.html',
-				controller: 'EditEventController'
-			}).
-			when('/editvenue/:id',{
-				templateUrl: 'partials/editVenue.html',
-				controller: 'EditVenueController'
-			}).
-			when('/feedback',{
-				templateUrl: 'partials/feedback.html'
-			}).
-			when('/about',{
-				templateUrl: 'partials/about.html'
-			}).
-			otherwise({redirectTo: '/today'});
-
-}]);*/

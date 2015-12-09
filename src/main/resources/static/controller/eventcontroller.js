@@ -474,7 +474,9 @@ eventController.controller('ModalInstanceCtrl',function($scope,$modalInstance){
 
 eventController.controller('TodayController', ['$scope','$http', '$modal', '$location',
                                            	function($scope, $http, $modal, $location) {
-
+	
+	$scope.user = "";
+	
 	$http.get('auth').success(function(token) {
 		$http({
 			url : 'http://localhost:8080/auth',
@@ -517,7 +519,29 @@ eventController.controller('TodayController', ['$scope','$http', '$modal', '$loc
 	  $scope.pageCount = function() {
 	    return Math.ceil($scope.total/$scope.itemsPerPage);
 	  };
-}
+}]);
+
+
+eventController.controller('MyUpcomingEventsController', ['$scope','$http', '$modal', '$location',function($scope, $http, $modal, $location) {
+
+	var user = "";
+	alert("myevents");
+   	$http.get('auth').success(function(token) {
+   		$http({
+   			url : 'http://localhost:8080/auth',
+   			method : 'GET',
+   			headers : {
+   				'X-Auth-Token' : token.token
+   			}
+   		}).success(function(data) {
+   			user = data.principal.username;
+   		});
+   	});
+
+   	alert("user: "+user);
+   	 
+}]);
+
 /*
 eventController.controller('TodayController', ['$scope','$http', '$modal', '$location',
 	function($scope, $http, $modal, $location) {
@@ -584,5 +608,5 @@ eventController.controller('TodayController', ['$scope','$http', '$modal', '$loc
           $scope.loading = false;
           $scope.errormsg = error.message;
         });
-	}*/    
-]);
+	}    
+]);*/
