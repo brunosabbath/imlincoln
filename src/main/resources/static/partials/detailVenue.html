@@ -1,7 +1,6 @@
 <div class="scroll-thru-me" scroller>
 	<div class="container">
 		
-		  
 		  <!--<div class="col-sm-6 col-md-4">-->
 		    <div class="panel panel-outro">
 		       <div class="panel-body">
@@ -15,7 +14,20 @@
 				<h4>email: <a href="mailto:{{venue.email}}" class="mylink">{{venue.email}}</a></h4>
 		       </div>
 		    </div>
-		  
 		
 	</div>
+	
+	<div class="container">
+		<div class="panel-body">
+			<h2>Upcoming events</h2>
+			<span ng-repeat="event in venue.events">
+				<div class="panel-body">
+			       	<h1 class="event-title"><strong><a href="#/week/{{event.id}}" class="mylink">{{event.name | limitTo : 28}}</a></strong></h1>
+			       	<h6><i>From {{event.startDate | date:'medium'}} to {{event.endDate | date:'medium'}}</i></h6>
+			       	<h6>Price: {{event.price}}</h6>
+		       </div>
+			</span>
+		</div>
+	</div>
+	
 </div>

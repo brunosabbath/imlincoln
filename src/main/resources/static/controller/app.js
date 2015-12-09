@@ -89,6 +89,8 @@ app.config(function($routeProvider, $httpProvider){
 
 app.controller('login', function($rootScope, $scope, $http, $location, $route) {
 
+	
+	
 	$scope.tab = function(route) {
 		return $route.current && route === $route.current.controller;
 	};
@@ -99,7 +101,9 @@ app.controller('login', function($rootScope, $scope, $http, $location, $route) {
 
 		$http.get('http://localhost:8080/auth', { headers : headers }).success(function(data) {
 			if (data.name) {
+				//alert("check");
 				$rootScope.authenticated = true;
+				$scope.user = data.principal.username;
 			} else {
 				$rootScope.authenticated = false;
 			}
@@ -118,12 +122,10 @@ app.controller('login', function($rootScope, $scope, $http, $location, $route) {
 	$scope.login = function() {
 		authenticate($scope.credentials, function() {
 			if ($rootScope.authenticated) {
-				console.log("Login succeeded")
 				$location.path("/");
 				$scope.error = false;
 				$rootScope.authenticated = true;
 			} else {
-				console.log("Login failed")
 				$location.path("/login");
 				$scope.error = true;
 				$rootScope.authenticated = false;
@@ -133,7 +135,8 @@ app.controller('login', function($rootScope, $scope, $http, $location, $route) {
 
 	$scope.logout = function() {
 		$http.post('http://localhost:8080/logout', {}).success(function() {
-			console.log("worked");
+			//console.log("worked");
+			$scope.user = "";
 			$rootScope.authenticated = false;
 			$location.path("/");
 		}).error(function(data) {

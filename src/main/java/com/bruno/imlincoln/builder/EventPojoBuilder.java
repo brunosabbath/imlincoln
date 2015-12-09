@@ -25,7 +25,8 @@ public class EventPojoBuilder {
 	public static EventPojo buildSimpleWithoutVenue(Event event){
 		
 		EventPojo eventPojo = new EventPojo();
-		eventPojo.setId(event.getId()).setName(event.getName());
+		eventPojo.setId(event.getId()).setName(event.getName()).setStartDate(event.getStartDate().toString()).
+		setEndDate(event.getEndDate().toString()).setPrice(event.getPrice());
 		return eventPojo;
 	}
 	

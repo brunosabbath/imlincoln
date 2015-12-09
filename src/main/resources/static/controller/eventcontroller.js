@@ -475,6 +475,19 @@ eventController.controller('ModalInstanceCtrl',function($scope,$modalInstance){
 eventController.controller('TodayController', ['$scope','$http', '$modal', '$location',
                                            	function($scope, $http, $modal, $location) {
 
+	$http.get('auth').success(function(token) {
+		$http({
+			url : 'http://localhost:8080/auth',
+			method : 'GET',
+			headers : {
+				'X-Auth-Token' : token.token
+			}
+		}).success(function(data) {
+			//alert(data.principal.username);
+			$scope.user = data.principal.username;
+		});
+	});
+	
 	  $scope.itemsPerPage = 9;
 	  $scope.currentPage = 0;
 	  $scope.total = 50;
