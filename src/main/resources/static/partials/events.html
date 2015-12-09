@@ -12,9 +12,7 @@
 		       	<h6>{{event.description | limitTo: 100}}...</h6>
 		       	<h6><i>Starts at {{event.startDate | date:'medium'}}</i></h6>
 		       	<h6><i>Finishes at {{event.endDate | date:'medium'}}</i></h6>
-		       	<!--<button ng-click="editDeleteEvent($index,'edit')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
-		       	<button ng-click="editDeleteEvent($index,'delete')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
-		       	-->
+		       	<button ng-show="authenticated" ng-click="interested(event.id)" class="btn btn-danger btn-xs">I'm interested</button>
 		       </div>
 		    </div>
 		  </div>

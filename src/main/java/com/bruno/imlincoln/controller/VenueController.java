@@ -14,19 +14,21 @@ import com.bruno.imlincoln.exception.NotFoundException;
 import com.bruno.imlincoln.model.Venue;
 import com.bruno.imlincoln.model.pojo.VenuePojo;
 import com.bruno.imlincoln.service.VenueService;
+import com.bruno.imlincoln.service.impl.VenueServiceImpl;
 
 @RestController
 @RequestMapping("/venue")
 public class VenueController {
-
-	@Autowired
-	private VenueRepository repo;
 	
-	private VenueService service;
+	private final VenueService service;
+	
+	@Autowired
+	public VenueController(VenueService service) {
+		this.service = service;
+	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public List<VenuePojo> list(){
-		service = new VenueService(repo);
 		return service.list();
 	}
 	
@@ -34,7 +36,6 @@ public class VenueController {
 	public VenuePojo get(@PathVariable Long id){
 		
 		try {
-			service = new VenueService(repo);
 			return service.get(id);
 		} catch (NotFoundException e) {
 			throw e;
@@ -45,19 +46,16 @@ public class VenueController {
 	@RequestMapping(value = "name/{name}", method = RequestMethod.GET)
 	public List<VenuePojo> get(@PathVariable String name){
 		
-		service = new VenueService(repo);
 		return service.getByName(name);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public void update(@RequestBody Venue venue){
-		service = new VenueService(repo);
 		service.save(venue);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void update(@PathVariable Long id){
-		service = new VenueService(repo);
 		service.delete(id);
 	}
 	

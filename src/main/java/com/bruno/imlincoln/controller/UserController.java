@@ -16,14 +16,18 @@ import com.bruno.imlincoln.model.pojo.UserPojo;
 import com.bruno.imlincoln.roles.AdminUser;
 import com.bruno.imlincoln.roles.RoleUser;
 import com.bruno.imlincoln.service.UserService;
+import com.bruno.imlincoln.service.impl.UserServiceImpl;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
+	private final UserService service;
+	
 	@Autowired
-	private UserRepository repo;
-	private UserService service;
+	public UserController(UserService service){
+		this.service = service;
+	}
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
 	public Principal user(Principal user) {
@@ -31,9 +35,14 @@ public class UserController {
 		return user;
 	}
 	
+	@RequestMapping(value = "/event/{email}", method = RequestMethod.GET)
+	public UserPojo get(@PathVariable String email){
+		User user = service.getUserWithEvent(email);
+		return service.toPojo(user);
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public UserPojo get(@PathVariable Long id){
-		service = new UserService(repo);
 		User user = service.get(id);
 		return service.toPojo(user);
 	}

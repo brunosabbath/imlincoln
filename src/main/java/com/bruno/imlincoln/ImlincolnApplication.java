@@ -9,4 +9,5 @@ public class ImlincolnApplication{
     public static void main(String[] args) {
         SpringApplication.run(ImlincolnApplication.class, args);
     }
+
 }

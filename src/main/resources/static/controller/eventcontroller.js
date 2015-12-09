@@ -475,6 +475,11 @@ eventController.controller('ModalInstanceCtrl',function($scope,$modalInstance){
 eventController.controller('TodayController', ['$scope','$http', '$modal', '$location',
                                            	function($scope, $http, $modal, $location) {
 	
+	$scope.interested = function(index){
+		console.log("oi");
+		alert(index);
+	};
+	
 	$scope.user = "";
 	
 	$http.get('auth').success(function(token) {
@@ -525,7 +530,6 @@ eventController.controller('TodayController', ['$scope','$http', '$modal', '$loc
 eventController.controller('MyUpcomingEventsController', ['$scope','$http', '$modal', '$location',function($scope, $http, $modal, $location) {
 
 	var user = "";
-	alert("myevents");
    	$http.get('auth').success(function(token) {
    		$http({
    			url : 'http://localhost:8080/auth',
@@ -534,11 +538,22 @@ eventController.controller('MyUpcomingEventsController', ['$scope','$http', '$mo
    				'X-Auth-Token' : token.token
    			}
    		}).success(function(data) {
-   			user = data.principal.username;
+   			user = data.principal.username.concat(".trick");
+   			
+   			$http.get("http://localhost:8080/user/event/" + user).success(
+   				  //$http.get("http://localhost:8080/events-server/event/week").success(
+   		      //$http.get("http://eventslnk.elasticbeanstalk.com/event/week").success(
+   					function(response){
+   						$scope.loading = false;
+   						$scope.events = response.events;
+   					})
+   		      .error(function(errormsg){
+   		        $scope.loading = false;
+   		        $scope.errormsg = errormsg.message;
+   		      });
+   			
    		});
    	});
-
-   	alert("user: "+user);
    	 
 }]);
 
