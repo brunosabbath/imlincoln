@@ -3,21 +3,15 @@ package com.bruno.imlincoln.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bruno.imlincoln.dao.repository.EventRepository;
 import com.bruno.imlincoln.model.Event;
-import com.bruno.imlincoln.model.UserPrincipal;
 import com.bruno.imlincoln.model.pojo.EventPojo;
 import com.bruno.imlincoln.service.EventService;
-import com.bruno.imlincoln.service.impl.EventServiceImpl;
 
 @RestController
 @RequestMapping("/event")
@@ -61,14 +55,6 @@ public class EventController {
 		return service.findAvailableEvetsByName(name);
 	}
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public void test(){
-		//Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//User user = ((UserPrincipal) principal).getUser();
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println(user);
-	}
-	
 	@RequestMapping(value = "/venue/{id}" ,method = RequestMethod.GET)
 	public List<EventPojo> findEventsFromVenue(@PathVariable Long id){
 		return service.findEventByVenueId(id);
@@ -86,7 +72,7 @@ public class EventController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public void save(@RequestBody Event event){
-		service.save(event);;
+		service.save(event);
 	}
 	
 }

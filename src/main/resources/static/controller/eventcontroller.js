@@ -476,8 +476,11 @@ eventController.controller('TodayController', ['$scope','$http', '$modal', '$loc
                                            	function($scope, $http, $modal, $location) {
 	
 	$scope.interested = function(index){
-		console.log("oi");
-		alert(index);
+		
+		$http.post("http://localhost:8080/user/liked", index).success(function(data) {
+		}).error(function(msg){
+			alert("error liked" + msg);
+		});
 	};
 	
 	$scope.user = "";

@@ -1,6 +1,7 @@
 package com.bruno.imlincoln.service.impl;
 
 import java.sql.Timestamp;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,14 @@ public class EventServiceImpl implements EventService{
 			throw new NotFoundException("Event not found");
 		}
 		return EventPojoBuilder.build(event);
+	}
+	
+	public Event getEvent(Long id){
+		Event event = eventRepo.findOne(id);
+		if(event == null){
+			throw new NotFoundException("Event not found");
+		}
+		return event;
 	}
 
 	@Override

@@ -14,5 +14,5 @@ public interface UserService {
 	public User getUserWithEvent(String email);
 	public User get(Long id);
 	public UserPojo toPojo(User user);
-	
+	public void liked(User user, Event event);
 }

@@ -10,6 +10,7 @@ public interface EventService {
 	public void save(Event event) throws RuntimeException;
 	public List<EventPojo> list();
 	public EventPojo get(Long id);
+	public Event getEvent(Long id);
 	public List<EventPojo> getByName(String name);
 	public List<EventPojo> findAvailableEvets();
 	public List<EventPojo> findAvailableEvetsByName(String name);

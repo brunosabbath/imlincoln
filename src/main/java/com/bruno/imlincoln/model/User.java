@@ -42,7 +42,11 @@ public class User implements Serializable {
 	public User(Long id){
 		this.id = id;
 	}
-
+	
+	public void setId(Long id){
+		this.id = id;
+	}
+	
 	public Long getId() {
 		return this.id;
 	}
@@ -93,6 +97,10 @@ public class User implements Serializable {
 
 	public void setEvents(List<Event> events) {
 		this.events = events;
+	}
+	
+	public void updateEvent(Event event){
+		this.events.add(event);
 	}
 	
 	public void addEvent(Event event){

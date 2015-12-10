@@ -1,5 +1,6 @@
 package com.bruno.imlincoln.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +62,18 @@ public class UserServiceImpl implements UserService{
 		return userRepo.findUserById(id);
 	}
 	
+	
 	@Override
 	public UserPojo toPojo(User user){
 
 		return UserPojoBuilder.build(user);
+	}
+
+	@Override
+	public void liked(User user, Event event) {
+		user.updateEvent(event);
+		userRepo.save(user);
+		
 	}
 	
 }
