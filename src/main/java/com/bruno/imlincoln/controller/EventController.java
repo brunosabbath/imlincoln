@@ -45,6 +45,11 @@ public class EventController {
 		return service.getByName(name);
 	}
 	
+	@RequestMapping(value = "user/{id}" ,method = RequestMethod.GET)
+	public List<EventPojo> listEventsByOwnerId(@PathVariable Long id){
+		return service.findEventByOwnerId(id);
+	}
+	
 	@RequestMapping(value = "/available" ,method = RequestMethod.GET)
 	public List<EventPojo> findAvailableEvets(){
 		return service.findAvailableEvets();
@@ -60,7 +65,7 @@ public class EventController {
 		return service.findEventByVenueId(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable Long id){
 		service.delete(id);
 	}

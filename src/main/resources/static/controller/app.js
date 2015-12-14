@@ -49,6 +49,10 @@ app.config(function($routeProvider, $httpProvider){
 				templateUrl: 'partials/myUpcomingEvents.html',
 				controller: 'MyUpcomingEventsController'
 			}).
+			when('/myCreatedEvents',{
+				templateUrl: 'partials/myCreatedEvents.html',
+				controller: 'MyCreatedEventsController'
+			}).
 			when('/venues',{
 				templateUrl: 'partials/venues.html',
 				controller: 'VenueController'

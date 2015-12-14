@@ -21,4 +21,6 @@ public interface EventRepository extends PagingAndSortingRepository<Event, Long>
 	public List<Event> findEventByEndDateGreaterThanAndNameContainingIgnoreCase(Timestamp today, String name);
 	public Page<Event> findEventByEndDateGreaterThan(Timestamp today, Pageable pageable);
 	public List<Event> findEventByVenueId(Long id);
+	@Query("SELECT e FROM Event AS e WHERE e.owner.id = ?1")
+	public List<Event> findEventByOwnerId(Long id);
 }

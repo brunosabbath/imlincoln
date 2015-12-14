@@ -71,5 +71,27 @@ public class VenueServiceImpl implements VenueService{
 	public void delete(Long id) {
 		venueRepo.delete(id);
 	}
+
+	@Override
+	public List<Venue> listSimpleVenues() {
+		List<Venue> original = (List<Venue>) venueRepo.findAll();
+		return makeSimpleVenue(original);
+	}
+
+	private List<Venue> makeSimpleVenue(List<Venue> original) {
+		
+		for(Venue venue : original){
+			venue.setCity(null);
+			venue.setDescription(null);
+			venue.setEmail(null);
+			venue.setEvents(null);
+			venue.setFacebook(null);
+			venue.setTelephone(null);
+			venue.setTwitter(null);
+			venue.setWebsite(null);
+		}
+		
+		return original;
+	}
 	
 }

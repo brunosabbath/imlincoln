@@ -12,4 +12,5 @@ public interface VenueService {
 	public VenuePojo get(Long id);
 	public List<VenuePojo> getByName(String name);
 	public void delete(Long id);
+	public List<Venue> listSimpleVenues();
 }

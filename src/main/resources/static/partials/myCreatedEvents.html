@@ -1,0 +1,30 @@
+<div class="scroll-thru-me" scroller>
+	<div class="container">
+		<h2>My created events</h2>
+		<h1 class="event-title">{{errormsg}}</h1>
+		<div class="alert alert-danger" ng-show="loading">Loading</div>
+		
+		<span ng-repeat="event in events">
+			<h1 class="event-title"><strong><a href="#/week/{{event.id}}" class="mylink">{{event.name}}</a></strong></h1>
+			<h6><i>Starts at {{event.startDate | date:'medium'}}</i></h6>
+			<h6><i>Finishes at {{event.endDate | date:'medium'}}</i></h6>
+			<button ng-click="editEvent(event.id)"class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+			<button ng-click="deleteEvent(event.id)" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+		</span>
+	</div>
+
+
+	<!--<script type='text/ng-template' id='myModalContent.html'>
+        <div class='modal-header'>
+            <h3 class='modal-title'>Type password for event/venue</h3>
+        </div>
+        <div class='modal-body'>
+            <input type='password' ng-model='texto' />
+        </div>
+        <div class='modal-footer'>
+            <button class='btn btn-primary' ng-click='ok()'>OK</button>
+            <button class= 'btn btn-warning' ng-click='cancel()'>Cancel</button>
+        </div>
+    </script>-->
+
+</div>

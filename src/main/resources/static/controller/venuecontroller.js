@@ -5,7 +5,7 @@ venueController.service('VenueService', function($http){
 		listVenue: function(){
 
 			  //var resp = $http.get("http://localhost:8080/events-server/venue/").success(
-        var resp = $http.get("http://localhost:8080/venue/").success(
+        var resp = $http.get("http://localhost:8080/venue/s").success(
         //var resp = $http.get("http://eventslnk.elasticbeanstalk.com/venue/").success(
 				function(response){
 					var venues = [];

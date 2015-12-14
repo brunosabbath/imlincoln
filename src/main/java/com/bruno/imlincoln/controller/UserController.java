@@ -18,6 +18,7 @@ import com.bruno.imlincoln.roles.AdminUser;
 import com.bruno.imlincoln.roles.RoleUser;
 import com.bruno.imlincoln.service.EventService;
 import com.bruno.imlincoln.service.UserService;
+import com.bruno.imlincoln.utils.UserUtils;
 
 @RestController
 @RequestMapping("/user")
@@ -51,8 +52,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/liked", method = RequestMethod.POST)
 	public void likeEvent(@RequestBody Long eventId ){
-		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Long userId = currentUser.getId();
+		Long userId = UserUtils.getCurrentUserId();
 		
 		User user = service.get(userId);
 		Event event = eventService.getEvent(eventId);

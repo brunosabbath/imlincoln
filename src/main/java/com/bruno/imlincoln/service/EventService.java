@@ -17,5 +17,6 @@ public interface EventService {
 	public List<EventPojo> listPage(int total);
 	public List<EventPojo> findEventByVenueId(Long id);
 	public void delete(Long id);
+	public List<EventPojo> findEventByOwnerId(Long id);
 	
 }

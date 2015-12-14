@@ -18,6 +18,7 @@ import com.bruno.imlincoln.model.pojo.EventPojo;
 import com.bruno.imlincoln.model.validation.EventValidation;
 import com.bruno.imlincoln.service.EventService;
 import com.bruno.imlincoln.utils.DateUtils;
+import com.bruno.imlincoln.utils.UserUtils;
 
 @Service
 public class EventServiceImpl implements EventService{
@@ -33,6 +34,8 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public void save(Event event) throws RuntimeException{
 		
+		
+		event.setOwner(UserUtils.buildOwner());
 		EventValidation.checkValidation(event);
 		eventRepo.save(event);
 	}
@@ -126,6 +129,11 @@ public class EventServiceImpl implements EventService{
 	public List<EventPojo> findEventByVenueId(Long id) {
 		List<Event> list = eventRepo.findEventByVenueId(id);
 		return EventPojoBuilder.buildSimpleWithoutVenue(list);
+	}
+
+	@Override
+	public List<EventPojo> findEventByOwnerId(Long id) {
+		return EventPojoBuilder.buildSimpleWithoutVenue(eventRepo.findEventByOwnerId(id));
 	}
 
 }

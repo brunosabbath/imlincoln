@@ -165,7 +165,7 @@ eventController.controller('addEvent', ['$scope','$http', '$location','VenueServ
     }
 
     function buildDate(date,time){
-      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes());
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes()).getTime();
     };
 
 		$scope.sendForm = function(){
@@ -318,11 +318,11 @@ eventController.controller('EditEventController', ['$scope','$http', '$routePara
       $scope.venues = objs.data;
     },
     function(date){
-      alert("Sorry, we couldnt load venues");
+      alert("Sorry, we couldn't load venues");
     });
 
     $scope.addTag = function(){
-      $scope.tags.push({nameTag: $scope.nameTag});
+      $scope.tags.push({nameTag: $scope.name});
       $scope.nameTag = "";
     };
 
@@ -344,21 +344,22 @@ eventController.controller('EditEventController', ['$scope','$http', '$routePara
     };
 
     function buildDate(date,time){
-      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes());
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes()).getTime();
     };
 
     $scope.updateForm = function(){
+    	
         var obj = {
               id: $routeParams.id,
-              eventName: $scope.eventName, 
-              address: $scope.address, 
-              eventDescription: $scope.eventDescription,  
               startDate: buildDate($scope.startDate,$scope.startTime),
               endDate: buildDate($scope.endDate,$scope.endTime),
+              name: $scope.eventName,
+              price: $scope.price,
+              address: $scope.address, 
+              description: $scope.eventDescription,  
               tags: getTags(),
-              password: $scope.password,
               venue: getVenue(),
-              city: city
+              events: null
              };  
       
       $scope.loading = true;
@@ -376,19 +377,20 @@ eventController.controller('EditEventController', ['$scope','$http', '$routePara
       });
     };
 
-    $http.get("http://localhost:8080/event/id/" + $routeParams.id).success(
+    $http.get("http://localhost:8080/event/" + $routeParams.id).success(
     //$http.get("http://localhost:8080/events-server/event/id/" + $routeParams.id).success(
     //$http.get("http://eventslnk.elasticbeanstalk.com/event/id/" + $routeParams.id).success(  
     function(response) {
         //$scope.event = response;
         for(i=0; i < response.tags.length; i++)
-          $scope.tags.push({nameTag: response.tags[i].nameTag});
-
-        city = response.city;
-        $scope.eventName = response.eventName;
-        $scope.eventDescription = response.eventDescription;
+          $scope.tags.push({nameTag: response.tags[i].name});
+        
+        $scope.price = response.price;
+        $scope.eventName = response.name;
+        $scope.eventDescription = response.description;
         $scope.address = response.address;
-        $scope.password = response.password;
+        $scope.tags = response.tags;
+        
     });
   }
 ]);
@@ -557,6 +559,57 @@ eventController.controller('MyUpcomingEventsController', ['$scope','$http', '$mo
    			
    		});
    	});
+   	 
+}]);
+
+eventController.controller('MyCreatedEventsController', ['$scope','$http', '$location',function($scope, $http, $location) {
+
+	var user = "";
+   	$http.get('auth').success(function(token) {
+   		$http({
+   			url : 'http://localhost:8080/auth',
+   			method : 'GET',
+   			headers : {
+   				'X-Auth-Token' : token.token
+   			}
+   		}).success(function(data) {
+   			userId = data.principal.user.id;
+   			
+   			$http.get("http://localhost:8080/event/user/" + userId).success(
+   				  //$http.get("http://localhost:8080/events-server/event/week").success(
+   		      //$http.get("http://eventslnk.elasticbeanstalk.com/event/week").success(
+   					function(response){
+   						$scope.loading = false;
+   						$scope.events = response;
+   					})
+   		      .error(function(errormsg){
+   		        $scope.loading = false;
+   		        $scope.errormsg = errormsg.message;
+   		      });
+   			
+   		});
+   	});
+   	
+   	$scope.deleteEvent = function(eventId){
+   		if(confirm("Are you sure you want to delete this event?")){
+   			var deleteEvent = $http.delete("http://localhost:8080/event/" + eventId);
+            //var deleteEvent = $http.delete("http://localhost:8080/events-server/event/" + $scope.events[index].id);
+            //var deleteEvent = $http.delete("http://eventslnk.elasticbeanstalk.com/event/" + $scope.events[index].id);
+            deleteEvent.success(function(){
+              $scope.loading = false;
+              alert("event deleted");
+              $location.path("/today");
+            });
+            deleteEvent.error(function(errormsg){
+              $scope.loading = false;
+              alert(errormsg.message);
+            });
+   		}
+   	};
+
+   	$scope.editEvent = function(eventId){
+   		$location.path("/editevent/" + eventId);
+   	};
    	 
 }]);
 

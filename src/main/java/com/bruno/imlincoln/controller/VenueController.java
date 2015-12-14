@@ -49,6 +49,12 @@ public class VenueController {
 		return service.getByName(name);
 	}
 	
+	@RequestMapping(value = "/s", method = RequestMethod.GET)
+	public List<Venue> listSimpleVenues(){
+		
+		return service.listSimpleVenues();
+	}
+	
 	@RequestMapping(method = RequestMethod.PUT)
 	public void update(@RequestBody Venue venue){
 		service.save(venue);
