@@ -34,7 +34,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
 	public Principal user(Principal user) {
-		System.out.println(user);
 		return user;
 	}
 	

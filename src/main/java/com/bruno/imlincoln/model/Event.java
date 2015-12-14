@@ -7,11 +7,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-
-/**
- * The persistent class for the event database table.
- * 
- */
 @Entity
 public class Event implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -37,6 +32,9 @@ public class Event implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Venue venue;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	private User owner;
+	
 	//bi-directional many-to-many association to Tag
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
@@ -55,16 +53,13 @@ public class Event implements Serializable{
 	private List<User> users;
 
 	public Event() {
+		description = "";
 	}
 
 	public Event(Long id) {
 		this.id = id;
 	}
 
-	public void setId(Long id){
-		this.id = id;
-	}
-	
 	public Long getId() {
 		return this.id;
 	}
@@ -77,6 +72,14 @@ public class Event implements Serializable{
 		return this.address;
 	}
 
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
 	public Event setAddress(String address) {
 		this.address = address;
 		return this;
@@ -86,13 +89,18 @@ public class Event implements Serializable{
 		return this.description;
 	}
 
-	public Event setDescription(String description) {
+	/*public Event setDescription(String description) {
+		this.description = description;
+		return this;
+	}*/
+	
+	public Event setDescription(String description){
 		this.description = description;
 		return this;
 	}
 	
 	public Event updateDescription(String description){
-		this.description += "\n" + description + "\n";
+		this.description += "\n" + description;
 		return this;
 	}
 

@@ -1,9 +1,7 @@
 package com.bruno.imlincoln.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -36,24 +34,35 @@ public class User implements Serializable {
 		)
 	private List<Event> events;
 
+	@OneToMany(mappedBy="owner")
+	private List<Event> eventsIOwn;
+	
+	public void addEventIOwn(Event event){
+		this.events.add(event);
+	}
+	
+	public List<Event> getEventsIOwn() {
+		return eventsIOwn;
+	}
+
+	public void setEventsIOwn(List<Event> eventsIOwn) {
+		this.eventsIOwn = eventsIOwn;
+	}
+
 	public User() {
 	}
 	
 	public User(Long id){
 		this.id = id;
 	}
-	
-	public void setId(Long id){
-		this.id = id;
-	}
-	
+
 	public Long getId() {
 		return this.id;
 	}
 
-	/*public void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
-	}*/
+	}
 
 	public String getEmail() {
 		return this.email;
@@ -99,11 +108,11 @@ public class User implements Serializable {
 		this.events = events;
 	}
 	
-	public void updateEvent(Event event){
+	public void addEvent(Event event){
 		this.events.add(event);
 	}
 	
-	public void addEvent(Event event){
+	public void updateEvent(Event event){
 		this.events.add(event);
 	}
 	

@@ -1,7 +1,6 @@
 package com.bruno.imlincoln.service.impl;
 
 import java.sql.Timestamp;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +17,7 @@ import com.bruno.imlincoln.model.Event;
 import com.bruno.imlincoln.model.pojo.EventPojo;
 import com.bruno.imlincoln.model.validation.EventValidation;
 import com.bruno.imlincoln.service.EventService;
+import com.bruno.imlincoln.utils.DateUtils;
 
 @Service
 public class EventServiceImpl implements EventService{
@@ -92,7 +92,7 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public List<EventPojo> findAvailableEvetsByName(String name) {
 		
-		Timestamp today = Timestamp.valueOf(LocalDateTime.now());
+		Timestamp today = DateUtils.getToday();
 		List<Event> list = eventRepo.findEventByEndDateGreaterThanAndNameContainingIgnoreCase(today,name);
 		
 		if(list == null || list.isEmpty())
@@ -110,7 +110,8 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public List<EventPojo> listPage(int total) {
 		PageRequest request = new PageRequest(total, TOTAL_EVENTS_PER_PAGE);
-		Page<Event> listOldPage = eventRepo.findAll(request);
+		Page<Event> listOldPage = eventRepo.findEventByEndDateGreaterThan(DateUtils.getToday(), request);
+		//Page<Event> listOldPage = eventRepo.findAll(request);
 		List<Event> listEvent = new ArrayList<Event>();
 		
 		for(Event e : listOldPage)

@@ -1,6 +1,7 @@
 package com.bruno.imlincoln.service.impl;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.bruno.imlincoln.model.User;
 import com.bruno.imlincoln.model.pojo.UserPojo;
 import com.bruno.imlincoln.model.validation.UserValidation;
 import com.bruno.imlincoln.service.UserService;
+import com.bruno.imlincoln.utils.DateUtils;
 import com.bruno.imlincoln.utils.EncryptPassword;
 
 @Service
@@ -53,10 +55,22 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getUserWithEvent(String email){
-		System.out.println(email);
-		return userRepo.findUserByEmail(email);
+		User user = userRepo.findUserByEmail(email);
+		user.setEvents(getAvailableEvents(user));
+		return user;
 	}
 	
+	private List<Event> getAvailableEvents(User user) {
+		List<Event> events = new ArrayList<Event>();
+		
+		for(Event event : user.getEvents()){
+			if(event.getEndDate().after(DateUtils.getToday()))
+				events.add(event);
+		}
+		
+		return events;
+	}
+
 	@Override
 	public User get(Long id) {
 		return userRepo.findUserById(id);

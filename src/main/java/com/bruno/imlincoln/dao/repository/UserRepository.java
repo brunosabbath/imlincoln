@@ -1,5 +1,7 @@
 package com.bruno.imlincoln.dao.repository;
 
+import java.sql.Timestamp;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

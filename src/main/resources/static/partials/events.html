@@ -13,6 +13,9 @@
 		       	<h6><i>Starts at {{event.startDate | date:'medium'}}</i></h6>
 		       	<h6><i>Finishes at {{event.endDate | date:'medium'}}</i></h6>
 		       	<button ng-show="authenticated" ng-click="interested(event.id)" class="btn btn-danger btn-xs">I'm interested</button>
+		       	<!-- <button ng-click="editDeleteVenue($index,'edit')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+		       	<button ng-click="editDeleteVenue($index,'delete')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+		       	 -->
 		       </div>
 		    </div>
 		  </div>
